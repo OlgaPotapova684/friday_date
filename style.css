@@ -1,0 +1,316 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Nunito", system-ui, sans-serif;
+  background: #fce4ec;
+  color: #c2185b;
+  overflow-x: hidden;
+}
+
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255, 182, 193, 0.35) 0 8px, transparent 9px),
+    radial-gradient(circle at 85% 75%, rgba(255, 182, 193, 0.3) 0 6px, transparent 7px),
+    radial-gradient(circle at 70% 15%, rgba(255, 182, 193, 0.25) 0 5px, transparent 6px),
+    radial-gradient(circle at 25% 80%, rgba(255, 182, 193, 0.28) 0 7px, transparent 8px),
+    radial-gradient(circle at 45% 35%, rgba(255, 182, 193, 0.32) 0 6px, transparent 7px),
+    radial-gradient(circle at 92% 40%, rgba(255, 182, 193, 0.28) 0 7px, transparent 8px),
+    radial-gradient(circle at 8% 55%, rgba(255, 182, 193, 0.26) 0 5px, transparent 6px),
+    radial-gradient(circle at 55% 90%, rgba(255, 182, 193, 0.3) 0 8px, transparent 9px);
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding:
+    max(1.25rem, env(safe-area-inset-top))
+    max(1.25rem, env(safe-area-inset-right))
+    max(1.25rem, env(safe-area-inset-bottom))
+    max(1.25rem, env(safe-area-inset-left));
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.question {
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: clamp(1rem, 4vw, 1.75rem);
+  max-width: 16ch;
+}
+
+.cat-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 360px);
+  margin-bottom: clamp(1.25rem, 5vw, 2rem);
+  background: #fce4ec;
+  border-radius: 1.5rem;
+}
+
+.cat-bounce {
+  background: #fce4ec;
+  line-height: 0;
+  animation: bounce 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(194, 24, 91, 0.14));
+}
+
+.cat {
+  display: block;
+  width: min(320px, 78vw);
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  background-color: #fce4ec;
+}
+
+.float-heart {
+  position: absolute;
+  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  animation: float 2s ease-in-out infinite;
+  user-select: none;
+  z-index: 2;
+}
+
+.heart-1 {
+  left: clamp(0rem, 2vw, 0.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  animation-delay: 0s;
+}
+
+.heart-2 {
+  right: clamp(0rem, 2vw, 0.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  animation-delay: 0.8s;
+}
+
+.heart-3 {
+  left: 18%;
+  top: 12%;
+  animation-delay: 0.4s;
+}
+
+.heart-4 {
+  right: 18%;
+  top: 12%;
+  animation-delay: 1.2s;
+}
+
+.buttons {
+  position: relative;
+  width: min(420px, 100%);
+  min-height: 5.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #ab47bc, #8e24aa);
+  box-shadow: 0 6px 18px rgba(142, 36, 170, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(142, 36, 170, 0.42);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-yes {
+  font-size: clamp(1.15rem, 4vw, 1.35rem);
+  padding: 0.85rem clamp(2rem, 8vw, 2.8rem);
+  z-index: 2;
+}
+
+.btn-no {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: clamp(0.95rem, 3.5vw, 1rem);
+  padding: 0.55rem clamp(1.1rem, 4vw, 1.4rem);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.btn-no.escaping {
+  position: fixed;
+  transition: left 0.2s ease, top 0.2s ease;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-no.escaping:hover,
+.btn-no.escaping:active {
+  transform: none;
+}
+
+.btn-no.caught {
+  cursor: pointer;
+}
+
+.page--result {
+  justify-content: space-between;
+}
+
+.page--result .result-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 800;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 18ch;
+  padding: 0 1rem;
+  transition: opacity 0.5s ease;
+}
+
+.page--result .result-title--phase2 {
+  font-size: clamp(1.5rem, 6vw, 2.6rem);
+  max-width: 14ch;
+}
+
+.page--result .result-title--fade {
+  opacity: 0;
+}
+
+.btn-back {
+  align-self: center;
+  margin-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  font-size: clamp(0.5rem, 1.75vw, 0.6rem);
+  padding: 0.35rem clamp(0.75rem, 3vw, 1.1rem);
+  text-transform: lowercase;
+  box-shadow: 0 3px 9px rgba(142, 36, 170, 0.3);
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-side {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: translateY(calc(-50% - 8px)) scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.15);
+    opacity: 1;
+  }
+}
+
+.heart-1,
+.heart-2 {
+  animation-name: float-side;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .buttons {
+    min-height: 4.5rem;
+  }
+
+  .btn-no {
+    right: 5%;
+    top: -0.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .question {
+    max-width: 14ch;
+  }
+
+  .heart-1 {
+    left: -0.25rem;
+  }
+
+  .heart-2 {
+    right: -0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-bounce,
+  .float-heart,
+  .page--result .result-title {
+    animation: none;
+  }
+
+  .btn-no.escaping {
+    transition: none;
+  }
+}

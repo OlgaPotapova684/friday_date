@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Увидимся в пятницу? 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="hearts-bg" aria-hidden="true"></div>
+
+  <main class="page" id="proposal">
+    <h1 class="question">Увидимся в пятницу вечером?</h1>
+
+    <div class="cat-wrap">
+      <span class="float-heart heart-1" aria-hidden="true">❤️</span>
+      <span class="float-heart heart-2" aria-hidden="true">❤️</span>
+      <span class="float-heart heart-3" aria-hidden="true">❤️</span>
+      <span class="float-heart heart-4" aria-hidden="true">❤️</span>
+      <div class="cat-bounce">
+        <img
+          class="cat"
+          src="assets/kitten.png"
+          alt="Милый котёнок"
+          width="320"
+          height="320"
+        >
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-yes" id="yesBtn" type="button">Даа!</button>
+      <button class="btn btn-no" id="noBtn" type="button">Не(</button>
+    </div>
+  </main>
+
+  <section class="page page--result hidden" id="yesPage">
+    <h2 class="result-title" id="yesTitle">Юхууу!</h2>
+    <button class="btn btn-back" id="backFromYes" type="button">вернуться назад</button>
+  </section>
+
+  <section class="page page--result hidden" id="sadPage">
+    <h2 class="result-title">Жаль</h2>
+    <button class="btn btn-back" id="changeMind" type="button">я передумал</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
