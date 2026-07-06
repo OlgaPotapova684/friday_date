@@ -5,15 +5,12 @@ const yesPage = document.getElementById("yesPage");
 const sadPage = document.getElementById("sadPage");
 const backFromYes = document.getElementById("backFromYes");
 const changeMind = document.getElementById("changeMind");
-const yesTitle = document.getElementById("yesTitle");
 
 const EDGE_PADDING = 16;
 const MAX_ESCAPES = 10;
-const YES_TEXT_DELAY = 2500;
 
 let escapeCount = 0;
 let sizeLocked = false;
-let yesTextTimer = null;
 
 const pages = [proposal, yesPage, sadPage];
 
@@ -88,35 +85,8 @@ function resetNoButton() {
   noBtn.style.right = "";
 }
 
-function resetYesTitle() {
-  if (yesTextTimer) {
-    clearTimeout(yesTextTimer);
-    yesTextTimer = null;
-  }
-
-  yesTitle.textContent = "Юхууу!";
-  yesTitle.classList.remove("result-title--phase2", "result-title--fade");
-}
-
-function showYesPage() {
-  resetYesTitle();
-  showPage(yesPage);
-
-  yesTextTimer = setTimeout(() => {
-    yesTitle.classList.add("result-title--fade");
-
-    yesTextTimer = setTimeout(() => {
-      yesTitle.textContent = "Дима..   считаю дни..))";
-      yesTitle.classList.add("result-title--phase2");
-      yesTitle.classList.remove("result-title--fade");
-      yesTextTimer = null;
-    }, 500);
-  }, YES_TEXT_DELAY);
-}
-
 function returnToProposal() {
   resetNoButton();
-  resetYesTitle();
   showPage(proposal);
 }
 
@@ -139,6 +109,6 @@ noBtn.addEventListener("click", () => {
   }
 });
 
-yesBtn.addEventListener("click", showYesPage);
+yesBtn.addEventListener("click", () => showPage(yesPage));
 backFromYes.addEventListener("click", returnToProposal);
 changeMind.addEventListener("click", returnToProposal);
